@@ -60,8 +60,12 @@ def mas_informacion(nombre,latitud,longitud,area=[30, 30, 40]):
 
 # -----------------------------------------------------------
 # CODIGO
-st.title('.')
 st.image('imgs/IntroTesisColor Cafe.png')
+with st.sidebar:
+    st.image('imgs/logo-udenar.png')
+    col1, col2 = st.columns(2)
+    col1.image('imgs/maie.png')
+    col2.markdown("Para mas información puede visitar la página: [Tesis MAIE](https://andresinsuasty.com/tesis.html)")
 # uploaded_file = st.file_uploader('Subir Imagen',accept_multiple_files=False,type="jpg")
 # if uploaded_file is not None:
 #     image = Image.open(uploaded_file)
@@ -114,9 +118,42 @@ if selection == 'Segmentación':
 if selection == 'Detección':
     st.write('Usted escogió detección')
     col1, col2 = st.columns(2)
-    col1.selectbox('Escoger una imagen', ['Imagen 1', 'Imagen 2','Imagen 3','Imagen 4'])
-    col2.write("This is column 2")
-
+    img_select = col1.selectbox('Escoger una imagen', ['RGB', 'Banda verde','Banda Roja','Banda Borde Rojo','Banda Infrarroja'])
+    if img_select == 'RGB':
+        col1.markdown('Imagen seleccionada:\n')
+        col1.image('imgs/deteccion/img01_original.jpg',caption="Imagen de Entrada para el modelo")
+        col2.markdown("""#### Resultado inferencia modelo de detección""")
+        col2.markdown("""El modelo encontró:""")
+        col2.markdown("""  * **93** ARBUSTOS DE CAFÉ """)
+        col2.image('imgs/deteccion/img01.jpg',caption="Imagen de salida, con detección de arbustos de café")
+    if img_select == 'Banda verde':
+        col1.markdown('Imagen seleccionada:\n')
+        col1.image('imgs/deteccion/img02_original.jpg',caption="Imagen de Entrada para el modelo")
+        col2.markdown("""#### Resultado inferencia modelo de detección""")
+        col2.markdown("""El modelo encontró:""")
+        col2.markdown("""  * **54** ARBUSTOS DE CAFÉ """)
+        col2.image('imgs/deteccion/img02.jpg',caption="Imagen de salida, con detección de arbustos de café")
+    if img_select == 'Banda Roja':
+        col1.markdown('Imagen seleccionada:\n')
+        col1.image('imgs/deteccion/img03_original.jpg',caption="Imagen de Entrada para el modelo")
+        col2.markdown("""#### Resultado inferencia modelo de detección""")
+        col2.markdown("""El modelo encontró:""")
+        col2.markdown("""  * **67** ARBUSTOS DE CAFÉ """)
+        col2.image('imgs/deteccion/img03.jpg',caption="Imagen de salida, con detección de arbustos de café")
+    if img_select == 'Banda Borde Rojo':
+        col1.markdown('Imagen seleccionada:\n')
+        col1.image('imgs/deteccion/img04_original.jpg',caption="Imagen de Entrada para el modelo")
+        col2.markdown("""#### Resultado inferencia modelo de detección""")
+        col2.markdown("""El modelo encontró:""")
+        col2.markdown("""  * **63** ARBUSTOS DE CAFÉ """)
+        col2.image('imgs/deteccion/img04.jpg',caption="Imagen de salida, con detección de arbustos de café")
+    if img_select == 'Banda Infrarroja':
+        col1.markdown('Imagen seleccionada:\n')
+        col1.image('imgs/deteccion/img05_original.jpg',caption="Imagen de Entrada para el modelo")
+        col2.markdown("""#### Resultado inferencia modelo de detección""")
+        col2.markdown("""El modelo encontró:""")
+        col2.markdown("""  * **57** ARBUSTOS DE CAFÉ """)
+        col2.image('imgs/deteccion/img05.jpg',caption="Imagen de salida, con detección de arbustos de café")
 
 ## TODO
 # Falta desarrollar analisis a la imaen de piloto1 y agregar mas ejemplos
