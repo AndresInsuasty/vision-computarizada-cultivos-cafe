@@ -154,6 +154,24 @@ if selection == 'Detección':
         col2.markdown("""El modelo encontró:""")
         col2.markdown("""  * **57** ARBUSTOS DE CAFÉ """)
         col2.image('imgs/deteccion/img05.jpg',caption="Imagen de salida, con detección de arbustos de café")
-
-## TODO
-# Falta desarrollar analisis a la imaen de piloto1 y agregar mas ejemplos
+    st.markdown('## Calculadora de producción')
+    if img_select == 'RGB':
+        ARBUSTOS=93
+    if img_select == 'Banda verde':
+        ARBUSTOS=54
+    if img_select == 'Banda Roja':
+        ARBUSTOS=67
+    if img_select == 'Banda Borde Rojo':
+        ARBUSTOS=63
+    if img_select == 'Banda Infrarroja':
+        ARBUSTOS=57
+    st.code('Arbustos={}'.format(ARBUSTOS))
+    NF = st.slider('Número botones florales por rama - Promedio', 0, 25,10)
+    NR = st.slider('Número ramas con botones florales - Promedio', 0, 50,7)
+    TF = NF*NR*ARBUSTOS
+    CCT_min = TF*0.5*1.8
+    CCT_max = TF*0.85*1.8
+    st.success('La producción de café se encuentra entre: {} y {} gramos'.format(round(CCT_min),round(CCT_max)))
+    col1, col2 = st.columns(2)
+    col1.metric('Producción mínima Kg', round(CCT_min/1000,1))
+    col2.metric('Producción máximo Kg', round(CCT_max/1000,1))
